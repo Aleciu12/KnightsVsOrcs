@@ -61,7 +61,10 @@ include(cmake/RegisterTests.cmake)
 # Configure sources
 
 # always STATIC (simpler); TBD if we ever want dynamic for this; BUILD_SHARED_LIBS is for ext deps
-add_library(${MAIN_LIBRARY_NAME} STATIC)
+add_library(${MAIN_LIBRARY_NAME} STATIC
+        include/Enemy.h
+
+        include/Player.h)
 
 # NOTE: update EXECUTABLE_NAME in .github/workflows/cmake.yml when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME}
@@ -69,6 +72,9 @@ add_executable(${MAIN_EXECUTABLE_NAME}
 )
 target_sources(${MAIN_LIBRARY_NAME}
     PRIVATE
+        src/Enemy.cpp
+        src/Unit.cpp
+        src/Player.cpp
         src/Example.cpp
         src/internal/Detail.cpp
 )

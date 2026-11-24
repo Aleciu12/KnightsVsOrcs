@@ -9,45 +9,59 @@
 #include <stdexcept>
 
 #include "Example.h"      // the library under test; include/ comes from oop
+#include "Unit.h"
+#include "Enemy.h"
+#include "Player.h"
+#include <iostream>
 
 static_assert(Example::limit > 0, "the invariant below assumes a positive limit");
 
 // checked through the public interface only: the helper behind the invariant is
 // file-local in src/Example.cpp and cannot even be named here
 int main() {
-    Example e;
-    assert(e.value() == 0);
+    Unit unit{"Hero", 250, 50, 10, UnitType::Offensive};
+    Unit dead_as_hell{"Dead", 0, -5, 10, UnitType::Farm};
+    assert(unit.isDead() == false);
+    unit.loseHP(249);
+    assert(unit.isDead() == false);
+    unit.loseHP(1);
+    assert(unit.isDead() == true);
+    unit.loseHP(-50);
+    assert(unit.isDead() == true);
+    assert(dead_as_hell.isDead() == true);
+    std::cout << unit << "\n";
+    std::cout << dead_as_hell << "\n";
 
-    e.add(7);
-    assert(e.value() == 7);
-    e.add(-7);
-    assert(e.value() == 0);
+    Enemy en1{"Villain", 250, 3, 50, 1.2, EnemyType::Agile};
+    Enemy en2{"VERY dead", 0, -5, -100, -525, EnemyType::Tank};
 
-    bool threw = false;
-    try {
-        e.add(-1);
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "add() must refuse to go below 0");
-    assert(e.value() == 0 && "a failed call leaves the object untouched");
+    assert(en1.isDead() == false);
+    std::cout << en1 << "\n";
+    assert(en2.isDead() == true);
+    en1.loseHP(250);
+    assert(en1.isDead() == true);
+    std::cout << en2 << "\n";
 
-    threw = false;
-    try {
-        e.add(Example::limit + 1);
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "add() must refuse to go above limit");
+    Player p{"Savior", 500, 300, {unit}};
+    std::cout << p << "\n";
+    assert(p.spendResources(-50) == false);
+    assert(p.loseCondition() == false);
+    p.loseHP(250);
+    assert(p.loseCondition() == false);
+    p.loseHP(-50);
+    assert(p.loseCondition() == false);
+    p.loseHP(50);
+    assert(p.loseCondition() == true);
+    assert(p.spendResources(500) == true);
+    assert(p.spendResources(1) == false);
+    p.addResources(-50);
+    assert(p.spendResources(50) == false);
+    p.addResources(500);
+    assert(p.spendResources(350) == true);
 
-    threw = false;
-    try {
-        Example broken{Example::limit + 1};
-        (void) broken;
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "the constructor must not hand out a broken object either");
+    std::cout << p << "\n";
 
+    Player p1{"a", 1, 1, {}};
+    std::cout << p1 << "\n";
     return 0;
 }

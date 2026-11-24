@@ -1,4 +1,6 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# Knights vs. Orcs
+
+Un joc realizat in C++ bazat si inspirat de Plants vs. Zombies.
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
