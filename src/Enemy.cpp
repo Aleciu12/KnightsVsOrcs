@@ -35,7 +35,7 @@ bool Enemy::isDead() const {
     return hp_ == 0;
 }
 
-int Enemy::getReward(int reward) {
-    reward_ = reward;
+int Enemy::getReward() const {
     return reward_;
 }
+

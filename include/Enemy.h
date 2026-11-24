@@ -19,7 +19,7 @@ class Enemy {
 private:
     std::string name_;
     int hp_, dmg_, reward_;
-    float speed_;
+    double speed_;
     EnemyType type_;
 
 public:
@@ -27,7 +27,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Enemy& enemy);
     void loseHP(int dmg);
     bool isDead() const;
-    int getReward(int reward);
+    int getReward() const;
 };
 
 

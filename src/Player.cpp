@@ -21,7 +21,7 @@ bool Player::spendResources(int amount) {
 }
 
 void Player::addResources(int amount) {
-    if (amount <= 0) return;
+    if (amount < 0) return;
     gold_ += amount;
 }
 

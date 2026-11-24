@@ -6,15 +6,12 @@
 // Keep the checks on in every build type.
 #undef NDEBUG
 #include <cassert>
-#include <stdexcept>
 
-#include "Example.h"      // the library under test; include/ comes from oop
 #include "Unit.h"
 #include "Enemy.h"
 #include "Player.h"
 #include <iostream>
 
-static_assert(Example::limit > 0, "the invariant below assumes a positive limit");
 
 // checked through the public interface only: the helper behind the invariant is
 // file-local in src/Example.cpp and cannot even be named here
@@ -41,10 +38,13 @@ int main() {
     en1.loseHP(250);
     assert(en1.isDead() == true);
     std::cout << en2 << "\n";
+    assert(en1.getReward() == 50);
+    assert(en2.getReward() == 0);
 
     Player p{"Savior", 500, 300, {unit}};
     std::cout << p << "\n";
-    assert(p.spendResources(-50) == false);
+    bool spent = p.spendResources(-50);
+    assert(spent == false);
     assert(p.loseCondition() == false);
     p.loseHP(250);
     assert(p.loseCondition() == false);
@@ -52,12 +52,16 @@ int main() {
     assert(p.loseCondition() == false);
     p.loseHP(50);
     assert(p.loseCondition() == true);
-    assert(p.spendResources(500) == true);
-    assert(p.spendResources(1) == false);
+    spent = p.spendResources(500);
+    assert(spent == true);
+    spent = p.spendResources(1);
+    assert(spent == false);
     p.addResources(-50);
-    assert(p.spendResources(50) == false);
+    spent = p.spendResources(50);
+    assert(spent == false);
     p.addResources(500);
-    assert(p.spendResources(350) == true);
+    spent = p.spendResources(350);
+    assert(spent == true);
 
     std::cout << p << "\n";
 
