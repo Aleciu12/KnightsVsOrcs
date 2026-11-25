@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #ifndef OOP_ENEMY_H
 #define OOP_ENEMY_H
 #include <string>
@@ -28,7 +24,9 @@ public:
     void loseHP(int dmg);
     bool isDead() const;
     int getReward() const;
+    int getDmg() const;
+    double getSpeed() const;
 };
 
 
-#endif //OOP_ENEMY_H
+#endif

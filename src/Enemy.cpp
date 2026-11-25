@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #include "Enemy.h"
 
 std::ostream& operator<<(std::ostream& os, EnemyType type) {
@@ -37,5 +33,13 @@ bool Enemy::isDead() const {
 
 int Enemy::getReward() const {
     return reward_;
+}
+
+int Enemy::getDmg() const {
+    return dmg_;
+}
+
+double Enemy::getSpeed() const {
+    return speed_;
 }
 

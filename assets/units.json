@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Knight",
+    "hp": 120,
+    "dmg": 45,
+    "cost": 50,
+    "type": "Offensive"
+  },
+  {
+    "name": "ShieldWall",
+    "hp": 220,
+    "dmg": 0,
+    "cost": 40,
+    "type": "Defensive"
+  },
+  {
+    "name": "GoldFarm",
+    "hp": 80,
+    "dmg": 0,
+    "cost": 30,
+    "type": "Farm"
+  }
+]

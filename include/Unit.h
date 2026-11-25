@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #ifndef OOP_UNIT_H
 #define OOP_UNIT_H
 #include <string>
@@ -25,7 +21,10 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Unit& unit);
     void loseHP(int dmg);
     bool isDead() const;
+    int getCost() const;
+    int getDmg() const;
+    UnitType getType() const;
 };
 
 
-#endif //OOP_UNIT_H
+#endif

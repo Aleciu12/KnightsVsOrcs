@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
 #include <string>
@@ -24,7 +20,9 @@ public:
     void loseHP(int dmg);
     bool loseCondition() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
+    std::size_t getUnitCount() const;
+    const Unit& getUnit(std::size_t index) const;
 };
 
 
-#endif //OOP_PLAYER_H
+#endif

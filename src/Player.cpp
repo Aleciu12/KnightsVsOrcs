@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #include "Player.h"
 
 Player::Player(const std::string& name, int gold, int base_hp, const std::vector<Unit>& units) : name_(name), gold_(gold), base_hp_(base_hp), units_(units) {
@@ -48,4 +44,13 @@ std::ostream& operator<<(std::ostream& os, const Player& player) {
     }
     return os;
 }
+
+std::size_t Player::getUnitCount() const {
+    return units_.size();
+}
+
+const Unit& Player::getUnit(std::size_t index) const {
+    return units_[index];
+}
+
 

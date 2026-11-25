@@ -62,8 +62,13 @@ include(cmake/RegisterTests.cmake)
 
 # always STATIC (simpler); TBD if we ever want dynamic for this; BUILD_SHARED_LIBS is for ext deps
 add_library(${MAIN_LIBRARY_NAME} STATIC
+        include/Unit.h
         include/Enemy.h
-        include/Player.h)
+        include/Player.h
+        include/GameEngine.h
+        include/DataLoader.h
+        src/GameEngine.cpp
+        src/DataLoader.cpp)
 
 # NOTE: update EXECUTABLE_NAME in .github/workflows/cmake.yml when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME}

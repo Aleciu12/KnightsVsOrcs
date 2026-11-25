@@ -1,2 +1,18 @@
-5
-11 22 33 44 55
+Alex
+place 0 0 2
+place 0 1 0
+place 0 2 1
+place 0 2 0
+spawn 0 0
+spawn 1 0
+spawn 1 2
+spawn 9 0
+save
+next
+next
+load
+next
+next
+next
+next
+status

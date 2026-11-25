@@ -1,7 +1,3 @@
-//
-// Created by Alex on 24.11.2026.
-//
-
 #include "Unit.h"
 
 std::ostream& operator<<(std::ostream& os, UnitType type) {
@@ -35,3 +31,14 @@ bool Unit::isDead() const {
     return hp_ == 0;
 }
 
+int Unit::getCost() const {
+    return cost_;
+}
+
+int Unit::getDmg() const {
+    return dmg_;
+}
+
+UnitType Unit::getType() const {
+    return type_;
+}

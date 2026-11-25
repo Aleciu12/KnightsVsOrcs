@@ -1,0 +1,26 @@
+[
+  {
+    "name": "OrcGrunt",
+    "hp": 90,
+    "dmg": 20,
+    "reward": 35,
+    "speed": 1.0,
+    "type": "Average"
+  },
+  {
+    "name": "OrcScout",
+    "hp": 60,
+    "dmg": 15,
+    "reward": 30,
+    "speed": 1.2,
+    "type": "Agile"
+  },
+  {
+    "name": "OrcBrute",
+    "hp": 180,
+    "dmg": 35,
+    "reward": 60,
+    "speed": 0.5,
+    "type": "Tank"
+  }
+]

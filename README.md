@@ -1,6 +1,6 @@
 # Knights vs. Orcs
 
-Un joc realizat in C++ bazat si inspirat de Plants vs. Zombies.
+Un joc de strategie pe ture realizat în C++, inspirat de *Plants vs. Zombies*. Jucătorul își apără baza plasând pe o grilă unități ofensive (`Offensive`), defensive (`Defensive`) și ferme generatoare de resurse (`Farm`) împotriva valurilor de orci (`Average`, `Agile`, `Tank`). Proiectul este structurat în jurul claselor `Unit`, `Enemy`, `Player` și `GameEngine` (care coordonează tabla, lupta pe ture, colectarea resurselor, avansul inamicilor și sistemul de checkpoint), cu datele unităților și inamicilor încărcate din fișiere JSON din `assets/`.
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
