@@ -19,25 +19,38 @@ void testGameEnginePlacementAndSpawn() {
     GameEngine engine{2, 4, player};
 
     assert(engine.getStatus() == GameStatus::Running);
-    assert(engine.placeUnit(-1, 0, 0) == false);
-    assert(engine.placeUnit(0, -1, 0) == false);
-    assert(engine.placeUnit(2, 0, 0) == false);
-    assert(engine.placeUnit(0, 4, 0) == false);
-    assert(engine.placeUnit(0, 0, 2) == false);
+    bool placed = engine.placeUnit(-1, 0, 0);
+    assert(placed == false);
+    placed = engine.placeUnit(0, -1, 0);
+    assert(placed == false);
+    placed = engine.placeUnit(2, 0, 0);
+    assert(placed == false);
+    placed = engine.placeUnit(0, 4, 0);
+    assert(placed == false);
+    placed = engine.placeUnit(0, 0, 2);
+    assert(placed == false);
 
-    assert(engine.placeUnit(0, 0, 0) == true);
-    assert(engine.placeUnit(0, 0, 1) == false);
-    assert(engine.placeUnit(0, 1, 1) == false);
+    placed = engine.placeUnit(0, 0, 0);
+    assert(placed == true);
+    placed = engine.placeUnit(0, 0, 1);
+    assert(placed == false);
+    placed = engine.placeUnit(0, 1, 1);
+    assert(placed == false);
 
     const Enemy orc{"Orc", 50, 10, 40, 1.0, EnemyType::Average};
     const Enemy deadOrc{"DeadOrc", 0, 10, 40, 1.0, EnemyType::Average};
-    assert(engine.spawnEnemy(orc, -1) == false);
-    assert(engine.spawnEnemy(orc, 2) == false);
-    assert(engine.spawnEnemy(deadOrc, 0) == false);
-    assert(engine.spawnEnemy(orc, 0) == true);
+    bool spawned = engine.spawnEnemy(orc, -1);
+    assert(spawned == false);
+    spawned = engine.spawnEnemy(orc, 2);
+    assert(spawned == false);
+    spawned = engine.spawnEnemy(deadOrc, 0);
+    assert(spawned == false);
+    spawned = engine.spawnEnemy(orc, 0);
+    assert(spawned == true);
 
     GameEngine emptyBoard{0, 0, player};
-    assert(emptyBoard.spawnEnemy(orc, 0) == false);
+    spawned = emptyBoard.spawnEnemy(orc, 0);
+    assert(spawned == false);
 }
 
 void testGameEngineFarmAndCombatAndWin() {
@@ -47,17 +60,22 @@ void testGameEngineFarmAndCombatAndWin() {
     const Player player{"Commander", 75, 100, {knight, farm, extra}};
     GameEngine engine{2, 4, player};
 
-    assert(engine.placeUnit(0, 0, 0) == true);
-    assert(engine.placeUnit(1, 0, 1) == true);
-    assert(engine.placeUnit(0, 1, 2) == false);
+    bool placed = engine.placeUnit(0, 0, 0);
+    assert(placed == true);
+    placed = engine.placeUnit(1, 0, 1);
+    assert(placed == true);
+    placed = engine.placeUnit(0, 1, 2);
+    assert(placed == false);
 
     const Enemy orc{"Orc", 50, 10, 40, 1.0, EnemyType::Average};
-    assert(engine.spawnEnemy(orc, 0) == true);
+    const bool spawned = engine.spawnEnemy(orc, 0);
+    assert(spawned == true);
     assert(engine.getStatus() == GameStatus::Running);
 
     engine.nextTurn();
     assert(engine.getStatus() == GameStatus::Won);
-    assert(engine.placeUnit(0, 1, 2) == true);
+    placed = engine.placeUnit(0, 1, 2);
+    assert(placed == true);
 }
 
 void testGameEngineBlockingAndUnitCleanup() {
@@ -66,27 +84,34 @@ void testGameEngineBlockingAndUnitCleanup() {
     const Player player{"Defender", 50, 100, {wall, farm}};
     GameEngine engine{1, 3, player};
 
-    assert(engine.placeUnit(0, 1, 0) == true);
+    bool placed = engine.placeUnit(0, 1, 0);
+    assert(placed == true);
 
     const Enemy agile{"ScoutOrc", 200, 30, 50, 1.2, EnemyType::Agile};
-    assert(engine.spawnEnemy(agile, 0) == true);
+    bool spawned = engine.spawnEnemy(agile, 0);
+    assert(spawned == true);
 
     engine.nextTurn();
     assert(engine.getStatus() == GameStatus::Running);
-    assert(engine.placeUnit(0, 1, 0) == false);
+    placed = engine.placeUnit(0, 1, 0);
+    assert(placed == false);
 
     engine.nextTurn();
     assert(engine.getStatus() == GameStatus::Running);
-    assert(engine.placeUnit(0, 1, 0) == true);
+    placed = engine.placeUnit(0, 1, 0);
+    assert(placed == true);
 
     GameEngine bruteEngine{1, 3, player};
     const Enemy brute{"OrcBrute", 180, 35, 60, 0.5, EnemyType::Tank};
-    assert(bruteEngine.spawnEnemy(brute, 0) == true);
+    spawned = bruteEngine.spawnEnemy(brute, 0);
+    assert(spawned == true);
     bruteEngine.nextTurn();
-    assert(bruteEngine.placeUnit(0, 0, 1) == true);
+    placed = bruteEngine.placeUnit(0, 0, 1);
+    assert(placed == true);
     bruteEngine.nextTurn();
     assert(bruteEngine.getStatus() == GameStatus::Running);
-    assert(bruteEngine.placeUnit(0, 0, 1) == true);
+    placed = bruteEngine.placeUnit(0, 0, 1);
+    assert(placed == true);
 }
 
 void testGameEngineLossAndCopyAndOutput() {
@@ -96,12 +121,16 @@ void testGameEngineLossAndCopyAndOutput() {
     const Player player{"Hero", 100, 50, {knight, wall, farm}};
     GameEngine engine{2, 2, player};
 
-    assert(engine.placeUnit(0, 0, 0) == true);
-    assert(engine.placeUnit(0, 1, 1) == true);
-    assert(engine.placeUnit(1, 0, 2) == true);
+    bool placed = engine.placeUnit(0, 0, 0);
+    assert(placed == true);
+    placed = engine.placeUnit(0, 1, 1);
+    assert(placed == true);
+    placed = engine.placeUnit(1, 0, 2);
+    assert(placed == true);
 
     const Enemy boss{"BossOrc", 300, 50, 100, 1.0, EnemyType::Tank};
-    assert(engine.spawnEnemy(boss, 1) == true);
+    const bool spawned = engine.spawnEnemy(boss, 1);
+    assert(spawned == true);
 
     std::ostringstream oss;
     oss << engine;

@@ -24,8 +24,8 @@ private:
     std::vector<std::vector<std::optional<Unit>>> board_;
     struct ActiveEnemy {
         Enemy enemy;
-        int row;
-        double col;
+        int row = 0;
+        double col = 0.0;
     };
     std::vector<ActiveEnemy> enemies_;
 
